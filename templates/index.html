@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JoyVerse Emotion Detection</title>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Raleway', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(to right, #ffecd2 0%, #fcb69f 100%);
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+      padding: 2rem;
+    }
+
+    header {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      color: #3b2c35;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 1rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      padding: 2rem;
+      max-width: 700px;
+      width: 100%;
+      text-align: center;
+    }
+
+    #videoElement {
+      border-radius: 1rem;
+      width: 100%;
+      max-width: 480px;
+      height: auto;
+      margin-top: 1rem;
+    }
+
+    #emotionOutput {
+      margin-top: 1.5rem;
+      font-size: 1.8rem;
+      color: #e44d26;
+      font-weight: bold;
+    }
+
+    button {
+      background: #ff7e5f;
+      color: white;
+      padding: 0.75rem 2rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 2rem;
+      cursor: pointer;
+      margin-top: 1.5rem;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #eb6751;
+    }
+  </style>
+</head>
+<body>
+  <header>🌟 JoyVerse: Emotion Detection 🌟</header>
+
+  <div class="card">
+    <p>Click the button below to start your emotion detection journey using FaceMesh and our custom Transformer!</p>
+
+    <video autoplay="true" id="videoElement"></video>
+
+    <div id="emotionOutput">🧠 Waiting for prediction...</div>
+
+    <button onclick="startDetection()">Start Detection</button>
+  </div>
+
+  <script>
+    const video = document.querySelector("#videoElement");
+
+    navigator.mediaDevices.getUserMedia({ video: true })
+      .then(stream => {
+        video.srcObject = stream;
+      })
+      .catch(err => {
+        console.error("Error accessing webcam: ", err);
+      });
+
+    function startDetection() {
+      document.getElementById("emotionOutput").innerText = "⚙️ Detecting emotion...";
+
+      // Simulated backend call
+      setTimeout(() => {
+        const emotions = ["Happy", "Sad", "Angry", "Surprise", "Neutral", "Fear", "Disgust"];
+        const detected = emotions[Math.floor(Math.random() * emotions.length)];
+        document.getElementById("emotionOutput").innerText = `😊 Detected Emotion: ${detected}`;
+      }, 2000);
+    }
+  </script>
+</body>
+</html>
