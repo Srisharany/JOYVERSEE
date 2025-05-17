@@ -86,7 +86,7 @@
     <button onclick="startDetection()">Start Detection</button>
   </div>
 
-  <script>
+<!--   <script>
     const video = document.querySelector("#videoElement");
 
     navigator.mediaDevices.getUserMedia({ video: true })
@@ -107,6 +107,30 @@
         document.getElementById("emotionOutput").innerText = `😊 Detected Emotion: ${detected}`;
       }, 2000);
     }
-  </script>
+  </script> -->
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const video = document.querySelector("#videoElement");
+
+    navigator.mediaDevices.getUserMedia({ video: true })
+      .then(stream => {
+        video.srcObject = stream;
+      })
+      .catch(err => {
+        console.error("Error accessing webcam: ", err);
+      });
+
+    window.startDetection = function () {
+      document.getElementById("emotionOutput").innerText = "⚙️ Detecting emotion...";
+
+      // Simulated backend call
+      setTimeout(() => {
+        const emotions = ["Happy", "Sad", "Angry", "Surprise", "Neutral", "Fear", "Disgust"];
+        const detected = emotions[Math.floor(Math.random() * emotions.length)];
+        document.getElementById("emotionOutput").innerText = `😊 Detected Emotion: ${detected}`;
+      }, 2000);
+    }
+  });
+</script>
 </body>
 </html>
